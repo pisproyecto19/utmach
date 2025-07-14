@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antología de Animales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos generales */
+        :root {
+            --primary-color: #ab49a5; /* Morado más oscuro */
+            --secondary-color: #ede8f0; /* Morado de fondo */
+            --accent-color: #DDA0DD; /* Lila */
+            --text-color: #333;
+            --light-text-color: #f8f8f8;
+            --card-bg-color: #FFFFFF;
+            --border-color: #EEE;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--secondary-color); /* Fondo morado */
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Encabezado */
+        .main-header {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 10px var(--shadow-color);
+        }
+
+        .main-header h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 3rem;
+            margin: 0;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .main-header p {
+            font-size: 1.1rem;
+            margin-top: 5px;
+            opacity: 0.9;
+        }
+
+        /* Contenido principal */
+        main {
+            flex: 1;
+            padding: 40px 0;
+        }
+
+        .card {
+            background-color: var(--card-bg-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        h2 {
+            font-family: 'Merriweather', serif;
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h3 {
+            font-family: 'Merriweather', serif;
+            color: var(--primary-color);
+            font-size: 1.6rem;
+            margin-top: 0;
+            text-align: center;
+            margin-bottom: 25px;
+            display: flex; /* Para alinear el ícono con el texto */
+            align-items: center; /* Centrar verticalmente el ícono */
+            justify-content: center; /* Centrar el título y el ícono */
+            gap: 10px; /* Espacio entre el texto y el ícono */
+        }
+
+        /* Estilo para el ícono de lectura */
+        .read-icon {
+            cursor: pointer;
+            font-size: 1.2em; /* Tamaño del icono */
+            color: var(--accent-color);
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .read-icon:hover {
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        p {
+            color: var(--text-color);
+            text-align: justify;
+        }
+
+        /* Quizzes y formularios */
+        .quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .quiz-form .question-item {
+            margin-bottom: 10px;
+        }
+
+        .quiz-form label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: block;
+            color: var(--primary-color);
+        }
+
+        .quiz-dropdown, .quiz-checkbox {
+            padding: 10px 15px;
+            border: 1px solid var(--accent-color);
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: white;
+            cursor: pointer;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23DDA0DD%22%20d%3D%22M287%2C197.973L146.202%2C27.027L5.404%2C197.973H287z%22%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 12px auto;
+        }
+
+        .quiz-dropdown:focus, .quiz-checkbox:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(93, 63, 211, 0.2);
+        }
+        
+        /* Specific style for checkboxes to override dropdown arrow */
+        .quiz-checkbox {
+            -webkit-appearance: checkbox;
+            -moz-appearance: checkbox;
+            appearance: checkbox;
+            width: 20px; /* Adjust size */
+            height: 20px;
+            vertical-align: middle;
+            margin-right: 10px;
+            background-image: none; /* Remove dropdown arrow */
+        }
+
+        .submit-button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .submit-button:hover {
+            background-color: #4a33a3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .quiz-results {
+            margin-top: 25px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: center;
+            padding: 15px;
+            border: 2px dashed var(--accent-color);
+            border-radius: 8px;
+            background-color: #F3E5F5;
+        }
+
+        .quiz-results .score-perfect { color: #28a745; }
+        .quiz-results .score-good { color: #17a2b8; }
+        .quiz-results .score-average { color: #ffc107; }
+        .quiz-results .score-low { color: #dc3545; }
+
+        /* Estilos específicos de secciones */
+        .info-block {
+            padding: 15px;
+            background-color: #f7f7f7;
+            border-left: 5px solid var(--accent-color);
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .image-center {
+            display: block;
+            margin: 0 auto 20px auto;
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .image-with-caption {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .image-with-caption img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 2px solid var(--accent-color);
+        }
+        .image-with-caption p {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        /* Actividad de unir con líneas (convertida a dropdowns) */
+        .matching-activity .match-pair {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .matching-activity .match-pair:last-child {
+            border-bottom: none;
+        }
+        .matching-activity .term {
+            flex: 1;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        .matching-activity .dropdown-wrapper {
+            flex: 1;
+            text-align: right;
+        }
+
+        /* Sección de 3 imágenes juntas */
+        .three-images-together {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap; /* Permite que las imágenes se envuelvan en pantallas pequeñas */
+            margin-bottom: 30px;
+        }
+        .three-images-together img {
+            max-width: 30%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border: 2px solid var(--accent-color);
+            min-width: 150px;
+        }
+
+        /* Imagen horizontal larga */
+        .horizontal-image-section .horizontal-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto 30px auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            border: 3px solid var(--primary-color);
+        }
+        .horizontal-image-section .text-to-complete {
+            text-align: left; /* Alinea el texto para completar */
+            line-height: 2.5; /* Espacio para los selects */
+            font-size: 1.1em;
+        }
+        .horizontal-image-section .text-to-complete select {
+            vertical-align: middle;
+            margin: 0 5px;
+        }
+
+        /* Estilo para la pregunta con imagen al lado */
+        .question-with-image-layout {
+            display: flex;
+            align-items: flex-start; /* Alinea arriba el contenido de las columnas */
+            gap: 30px; /* Espacio entre la imagen y la pregunta */
+            margin-bottom: 25px;
+        }
+
+        .question-with-image-layout .image-column-small {
+            flex: 0 0 180px; /* Ancho fijo para la imagen */
+            text-align: center;
+            padding-top: 10px; /* Alinea la imagen un poco más abajo con el texto */
+        }
+
+        .question-with-image-layout .image-column-small img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--accent-color);
+        }
+
+        .question-with-image-layout .question-column-content {
+            flex: 1; /* Permite que la columna de la pregunta ocupe el espacio restante */
+        }
+
+
+        /* Pie de página */
+        .main-footer {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 40px;
+            box-shadow: 0 -2px 8px var(--shadow-color);
+        }
+
+        .main-footer p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            color: var(--light-text-color);
+        }
+
+        /* Media Queries para responsividad */
+        @media (max-width: 768px) {
+            .main-header h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.7rem; }
+            h3 { font-size: 1.4rem; }
+            .card { padding: 20px; }
+            .question-layout { flex-direction: column; gap: 20px; }
+            .image-column { flex: auto; text-align: center; }
+            .question-image { max-width: 80%; margin: 0 auto; }
+            .matching-activity .match-pair { flex-direction: column; align-items: flex-start; }
+            .matching-activity .dropdown-wrapper { text-align: left; width: 100%; }
+            .three-images-together img { max-width: 48%; }
+            
+            /* Ajuste para la nueva sección de pregunta con imagen al lado en móviles */
+            .question-with-image-layout { flex-direction: column; align-items: center; }
+            .question-with-image-layout .image-column-small { flex: none; width: 60%; margin-bottom: 20px; }
+            .question-with-image-layout .question-column-content { width: 100%; }
+            
+            h3 {
+                flex-direction: column; /* Apilar título e icono en pantallas pequeñas */
+                gap: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-header h1 { font-size: 1.8rem; }
+            .three-images-together img { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <h1>Leo para Aprender</h1>
+           
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="activity-section card" id="section-pre-lectura">
+            <h2>Antes de la lectura</h2>
+            <div class="info-block">
+                <p><strong>En equipo:</strong> En grupos de tres, averiguamos sobre los animales que viven en el África. Comparamos esta información con las respuestas de la actividad Nº3 y la corregimos.</p>
+                <p><strong>DESTREZA:</strong> Desarrollar estrategias cognitivas como lectura de paratextos, establecimiento del propósito de lectura, relectura, relectura selectiva y parafraseo para autorregular la comprensión de textos.</p>
+            </div>
+
+            <h3 id="activity-2">
+                2.  Señalar el texto adecuado para encontrar la información sobre los animales.
+                <span class="read-icon" onclick="readActivity('activity-2')">🔊</span>
+            </h3>
+            <div class="question-with-image-layout">
+                <div class="image-column-small">
+                    <img src="q1.png" alt="Libros y animales">
+                </div>
+                <div class="question-column-content">
+                    <form id="quiz-1" class="quiz-form">
+                        <div class="question-item">
+                            <label for="q1-1">¿Dónde buscarías información general sobre diversos animales?</label>
+                            <select id="q1-1" name="q1-1" class="quiz-dropdown">
+                                <option value="">-- Seleccionar --</option>
+                                <option value="Un libro de cuentos de hadas">Un libro de cuentos de hadas</option>
+                                <option value="Una enciclopedia de animales">Una enciclopedia de animales</option>
+                                <option value="Un cómic de superhéroes">Un cómic de superhéroes</option>
+                                <option value="Un recetario de cocina">Un recetario de cocina</option>
+                            </select>
+                        </div>
+                        <button type="button" class="submit-button" onclick="checkQuiz('quiz-1', 'results-1')">Verificar</button>
+                    </form>
+                </div>
+            </div>
+            <div id="results-1" class="quiz-results"></div>
+            
+            <h3 id="activity-3">
+                3. Encierro los animales que creo que viven en el África.
+                <span class="read-icon" onclick="readActivity('activity-3')">🔊</span>
+            </h3>
+            <p>(Selecciona las opciones correctas)</p>
+            <form id="quiz-2" class="quiz-form">
+                <div class="question-item">
+                    <label>
+                        <input type="checkbox" name="africa_animal" value="León" class="quiz-checkbox"> León
+                    </label>
+                    <label>
+                        <input type="checkbox" name="africa_animal" value="Pingüino" class="quiz-checkbox"> Pingüino
+                    </label>
+                    <label>
+                        <input type="checkbox" name="africa_animal" value="Elefante" class="quiz-checkbox"> Elefante
+                    </label>
+                    <label>
+                        <input type="checkbox" name="africa_animal" value="Koala" class="quiz-checkbox"> Koala
+                    </label>
+                    <label>
+                        <input type="checkbox" name="africa_animal" value="Cebra" class="quiz-checkbox"> Cebra
+                    </label>
+                    <label>
+                        <input type="checkbox" name="africa_animal" value="Oso Polar" class="quiz-checkbox"> Oso Polar
+                    </label>
+                </div>
+                <button type="button" class="submit-button" onclick="checkQuiz('quiz-2', 'results-2')">Verificar</button>
+            </form>
+            <div id="results-2" class="quiz-results"></div>
+        </section>
+
+        <section class="activity-section card" id="section-durante-lectura">
+            <h2>Durante la lectura</h2>
+            <div class="info-block">
+                <p>Encontré un libro que habla sobre la vida de varios animales.</p>
+                <p><strong>DESTREZAS:</strong> Leer oralmente con fluidez y entonación en contextos significativos de aprendizaje. / Leer de manera silenciosa y personal en situaciones de recreación, información y estudio./ Construir los significados de un texto a partir del establecimiento de relaciones de semejanza, diferencia, objeto-atributo, antecedente–consecuente, secuencia temporal, problema-solución, concepto-ejemplo.</p>
+            </div>
+
+            <h3 id="activity-4">
+                4. Completo el cuadro.
+                <span class="read-icon" onclick="readActivity('activity-4')">🔊</span>
+            </h3>
+            <p><strong>El elefante africano</strong></p>
+            <div class="image-with-caption">
+                <img src="elefante.png" alt="Elefante africano" class="image-center">
+                <p>El elefante es el animal más pesado. Su cuerpo tiene forma de barril. Posee una cola corta y patas largas y gruesas. Tiene orejas grandes. Tiene muy buen olfato. Usa la trompa para recoger hierba, hojas y frutas. Los colmillos también le sirven para excavar la tierra en busca de alimento y agua. Le gusta mucho bañarse. Absorbe agua con la trompa y la rocía sobre su cuerpo.</p>
+            </div>
+            <form id="quiz-3" class="quiz-form">
+                <div class="question-item">
+                    <label for="q3-1">¿Qué conozco sobre el elefante?</label>
+                    <select id="q3-1" name="q3-1" class="quiz-dropdown">
+                        <option value="">-- Elige --</option>
+                        <option value="Es el animal terrestre más grande">Es el animal terrestre más grande</option>
+                        <option value="Vuela como un ave">Vuela como un ave</option>
+                        <option value="Es muy pequeño">Es muy pequeño</option>
+                        <option value="Vive en el agua">Vive en el agua</option>
+                    </select>
+                </div>
+                <div class="question-item">
+                    <label for="q3-2">¿Qué deseo saber?</label>
+                    <select id="q3-2" name="q3-2" class="quiz-dropdown">
+                        <option value="">-- Elige --</option>
+                        <option value="Cuántos años vive un elefante">Cuántos años vive un elefante</option>
+                        <option value="Si puede hablar">Si puede hablar</option>
+                        <option value="De qué color es su sangre">De qué color es su sangre</option>
+                        <option value="Si es un animal doméstico">Si es un animal doméstico</option>
+                    </select>
+                </div>
+                <button type="button" class="submit-button" onclick="checkQuiz('quiz-3', 'results-3')">Verificar</button>
+            </form>
+            <div id="results-3" class="quiz-results"></div>
+            
+            
+
+            <h3 id="activity-6">
+                5. Uno con una línea las partes del cuerpo del elefante y su característica.
+                <span class="read-icon" onclick="readActivity('activity-6')">🔊</span>
+            </h3>
+            <form id="quiz-4" class="quiz-form matching-activity">
+                <div class="match-pair">
+                    <span class="term">Cola</span>
+                    <div class="dropdown-wrapper">
+                        <select name="q4-1" class="quiz-dropdown">
+                            <option value="">-- Característica --</option>
+                            <option value="corta">corta</option>
+                            <option value="larga y gruesa">larga y gruesa</option>
+                            <option value="recoge hierbas, hojas y frutas">recoge hierbas, hojas y frutas</option>
+                            <option value="excavar para buscar alimento">excavar para buscar alimento</option>
+                            <option value="grandes">grandes</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="match-pair">
+                    <span class="term">Patas</span>
+                    <div class="dropdown-wrapper">
+                        <select name="q4-2" class="quiz-dropdown">
+                            <option value="">-- Característica --</option>
+                            <option value="corta">corta</option>
+                            <option value="larga y gruesa">larga y gruesa</option>
+                            <option value="recoge hierbas, hojas y frutas">recoge hierbas, hojas y frutas</option>
+                            <option value="excavar para buscar alimento">excavar para buscar alimento</option>
+                            <option value="grandes">grandes</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="match-pair">
+                    <span class="term">Trompa</span>
+                    <div class="dropdown-wrapper">
+                        <select name="q4-3" class="quiz-dropdown">
+                            <option value="">-- Característica --</option>
+                            <option value="corta">corta</option>
+                            <option value="larga y gruesa">larga y gruesa</option>
+                            <option value="recoge hierbas, hojas y frutas">recoge hierbas, hojas y frutas</option>
+                            <option value="excavar para buscar alimento">excavar para buscar alimento</option>
+                            <option value="grandes">grandes</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="match-pair">
+                    <span class="term">Colmillos</span>
+                    <div class="dropdown-wrapper">
+                        <select name="q4-4" class="quiz-dropdown">
+                            <option value="">-- Característica --</option>
+                            <option value="corta">corta</option>
+                            <option value="larga y gruesa">larga y gruesa</option>
+                            <option value="recoge hierbas, hojas y frutas">recoge hierbas, hojas y frutas</option>
+                            <option value="excavar para buscar alimento">excavar para buscar alimento</option>
+                            <option value="grandes">grandes</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="match-pair">
+                    <span class="term">Orejas</span>
+                    <div class="dropdown-wrapper">
+                        <select name="q4-5" class="quiz-dropdown">
+                            <option value="">-- Característica --</option>
+                            <option value="corta">corta</option>
+                            <option value="larga y gruesa">larga y gruesa</option>
+                            <option value="recoge hierbas, hojas y frutas">recoge hierbas, hojas y frutas</option>
+                            <option value="excavar para buscar alimento">excavar para buscar alimento</option>
+                            <option value="grandes">grandes</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="button" class="submit-button" onclick="checkQuiz('quiz-4', 'results-4')">Verificar</button>
+            </form>
+            <div id="results-4" class="quiz-results"></div>
+        </section>
+
+        <section class="activity-section card" id="section-poslectura">
+            <h2>Poslectura</h2>
+            <div class="info-block">
+                <p><strong>Tarea:</strong> Averiguo a mis familiares qué conocen sobre los animales de África. Escribo la información en el cuaderno de borrador para compartirla en clase.</p>
+                <p><strong>DESTREZA:</strong> Comprender los contenidos implícitos de un texto basándose en inferencias espacio-temporales, referenciales y de causa-efecto.</p>
+            </div>
+
+            <h3 id="activity-7">
+                6. Selecciono tres características sobre la jirafa.
+                <span class="read-icon" onclick="readActivity('activity-7')">🔊</span>
+            </h3>
+            <p><strong>La jirafa</strong></p>
+            <div class="image-with-caption">
+                <img src="jirafa.png" alt="Jirafa" class="image-center">
+                <p>La jirafa es el animal más alto del mundo. Su cuello es largo y flexible. Es muy rápida. Sus patas delanteras son más largas que las traseras. Tiene que inclinarse para poder tomar agua. Se alimenta de hojas, hierba y ramitas. Las manchas en su cuerpo le ayudan a protegerse de otros animales porque puede camuflarse en la naturaleza. Tiene dos cuernos en su cabeza. La jirafa produce un sonido que no puede ser escuchado por el hombre.</p>
+            </div>
+            <form id="quiz-5" class="quiz-form">
+                <div class="question-item">
+                    <label for="q5-1">Característica 1:</label>
+                    <select id="q5-1" name="q5-1" class="quiz-dropdown">
+                        <option value="">-- Elige --</option>
+                        <option value="Es el animal más alto del mundo">Es el animal más alto del mundo</option>
+                        <option value="Es el animal más pesado">Es el animal más pesado</option>
+                        <option value="Tiene una piel gruesa">Tiene una piel gruesa</option>
+                        <option value="Vive en el polo">Vive en el polo</option>
+                    </select>
+                </div>
+                <div class="question-item">
+                    <label for="q5-2">Característica 2:</label>
+                    <select id="q5-2" name="q5-2" class="quiz-dropdown">
+                        <option value="">-- Elige --</option>
+                        <option value="Su cuello es corto y rígido">Su cuello es corto y rígido</option>
+                        <option value="Su cuello es largo y flexible">Su cuello es largo y flexible</option>
+                        <option value="Tiene cola larga">Tiene cola larga</option>
+                        <option value="No puede tomar agua">No puede tomar agua</option>
+                    </select>
+                </div>
+                <div class="question-item">
+                    <label for="q5-3">Característica 3:</label>
+                    <select id="q5-3" name="q5-3" class="quiz-dropdown">
+                        <option value="">-- Elige --</option>
+                        <option value="Se camufla gracias a sus manchas">Se camufla gracias a sus manchas</option>
+                        <option value="Sus manchas son para adornar">Sus manchas son para adornar</option>
+                        <option value="Es de color blanco">Es de color blanco</option>
+                        <option value="Emite sonidos fuertes">Emite sonidos fuertes</option>
+                    </select>
+                </div>
+                <button type="button" class="submit-button" onclick="checkQuiz('quiz-5', 'results-5')">Verificar Características</button>
+            </form>
+            <div id="results-5" class="quiz-results"></div>
+
+            <h3 id="activity-9">
+                7. Contesto las preguntas.
+                <span class="read-icon" onclick="readActivity('activity-9')">🔊</span>
+            </h3>
+            <form id="quiz-6" class="quiz-form">
+                <div class="question-item">
+                    <label for="q6-1">¿Qué parte del cuerpo de la jirafa es larga y flexible?</label>
+                    <select id="q6-1" name="q6-1" class="quiz-dropdown">
+                        <option value="">-- Elige --</option>
+                        <option value="El cuello">El cuello</option>
+                        <option value="La cola">La cola</option>
+                        <option value="Las patas">Las patas</option>
+                        <option value="Las orejas">Las orejas</option>
+                    </select>
+                </div>
+                <div class="question-item">
+                    <label for="q6-2">¿En qué se diferencian las patas delanteras de las patas traseras?</label>
+                    <select id="q6-2" name="q6-2" class="quiz-dropdown">
+                        <option value="">-- Elige --</option>
+                        <option value="Las delanteras son más cortas">Las delanteras son más cortas</option>
+                        <option value="No hay diferencia">No hay diferencia</option>
+                        <option value="Las delanteras son más largas">Las delanteras son más largas</option>
+                        <option value="Las traseras tienen pezuñas">Las traseras tienen pezuñas</option>
+                    </select>
+                </div>
+                <div class="question-item">
+                    <label for="q6-3">¿Para qué le sirven las manchas de su cuerpo?</label>
+                    <select id="q6-3" name="q6-3" class="quiz-dropdown">
+                        <option value="">-- Elige --</option>
+                        <option value="Para atraer pareja">Para atraer pareja</option>
+                        <option value="Para abrigarse">Para abrigarse</option>
+                        <option value="Le sirven para camuflarse">Le sirven para camuflarse</option>
+                        <option value="Para identificar a su familia">Para identificar a su familia</option>
+                    </select>
+                </div>
+                <div class="question-item">
+                    <label for="q6-4">¿De qué se alimenta la jirafa?</label>
+                    <select id="q6-4" name="q6-4" class="quiz-dropdown">
+                        <option value="">-- Elige --</option>
+                        <option value="De carne">De carne</option>
+                        <option value="De hojas, hierba y ramitas">De hojas, hierba y ramitas</option>
+                        <option value="De frutas">De frutas</option>
+                        <option value="De insectos">De insectos</option>
+                    </select>
+                </div>
+                <button type="button" class="submit-button" onclick="checkQuiz('quiz-6', 'results-6')">Verificar</button>
+            </form>
+            <div id="results-6" class="quiz-results"></div>
+        </section>
+
+        <section class="activity-section card" id="section-rinoceronte">
+            <h3 id="activity-11">
+                8. Leo el texto.
+                <span class="read-icon" onclick="readActivity('activity-11')">🔊</span>
+            </h3>
+            <p><strong>El rinoceronte</strong></p>
+            <div class="image-with-caption">
+                <img src="rinoceronte.png" alt="Rinoceronte" class="image-center">
+                <p>El rinoceronte es un animal grande. Su cuerpo está cubierto por una piel gruesa de color gris que se lastima por el calor. Por esta razón, el rinoceronte busca su alimento muy temprano en la mañana y en el atardecer. Come hierba y ramas. Su vista no es buena, por eso usa más su nariz y su oído para encontrar agua y alimento. Tiene un cuerno en la punta del hocico que usa cuando se pelea con otros rinocerontes.</p>
+            </div>
+            
+            <h3 id="activity-10">
+                9. Encierro las palabras que podrían describir a un rinoceronte.
+                <span class="read-icon" onclick="readActivity('activity-10')">🔊</span>
+            </h3>
+            <p>(Selecciona las opciones correctas)</p>
+            <form id="quiz-7" class="quiz-form">
+                <div class="question-item">
+                    <label>
+                        <input type="checkbox" name="rino_desc" value="grande" class="quiz-checkbox"> grande
+                    </label>
+                    <label>
+                        <input type="checkbox" name="rino_desc" value="pequeño" class="quiz-checkbox"> pequeño
+                    </label>
+                    <label>
+                        <input type="checkbox" name="rino_desc" value="piel gruesa" class="quiz-checkbox"> piel gruesa
+                    </label>
+                    <label>
+                        <input type="checkbox" name="rino_desc" value="vista buena" class="quiz-checkbox"> vista buena
+                    </label>
+                    <label>
+                        <input type="checkbox" name="rino_desc" value="cuerno en el hocico" class="quiz-checkbox"> cuerno en el hocico
+                    </label>
+                    <label>
+                        <input type="checkbox" name="rino_desc" value="ágil" class="quiz-checkbox"> ágil
+                    </label>
+                </div>
+                <button type="button" class="submit-button" onclick="checkQuiz('quiz-7', 'results-7')">Verificar</button>
+            </form>
+            <div id="results-7" class="quiz-results"></div>
+
+
+            <h3 id="activity-12">
+                10. Marco con una X las oraciones que son verdaderas.
+                <span class="read-icon" onclick="readActivity('activity-12')">🔊</span>
+            </h3>
+            <p>(Selecciona las oraciones correctas)</p>
+            <form id="quiz-8" class="quiz-form">
+                <div class="question-item">
+                    <label>
+                        <input type="checkbox" name="rino_verdadero" value="El cuerpo del rinoceronte está cubierto por una piel delgada." class="quiz-checkbox"> El cuerpo del rinoceronte está cubierto por una piel delgada.
+                    </label>
+                    <label>
+                        <input type="checkbox" name="rino_verdadero" value="El rinoceronte busca alimento en la mañana muy temprano." class="quiz-checkbox"> El rinoceronte busca alimento en la mañana muy temprano.
+                    </label>
+                    <label>
+                        <input type="checkbox" name="rino_verdadero" value="El olfato del rinoceronte no es bueno, por eso usa la vista." class="quiz-checkbox"> El olfato del rinoceronte no es bueno, por eso usa la vista.
+                    </label>
+                    <label>
+                        <input type="checkbox" name="rino_verdadero" value="El rinoceronte se alimenta de hierba y ramas." class="quiz-checkbox"> El rinoceronte se alimenta de hierba y ramas.
+                    </label>
+                    <label>
+                        <input type="checkbox" name="rino_verdadero" value="El rinoceronte tiene un cuerno en la punta del hocico." class="quiz-checkbox"> El rinoceronte tiene un cuerno en la punta del hocico.
+                    </label>
+                </div>
+                <button type="button" class="submit-button" onclick="checkQuiz('quiz-8', 'results-8')">Verificar</button>
+            </form>
+            <div id="results-8" class="quiz-results"></div>
+
+            <h3 id="activity-13">
+                11. Contesto las preguntas.
+                <span class="read-icon" onclick="readActivity('activity-13')">🔊</span>
+            </h3>
+            <form id="quiz-9" class="quiz-form">
+                <div class="question-item">
+                    <label for="q9-1">¿Por qué la piel del rinoceronte se lastima con el calor?</label>
+                    <select id="q9-1" name="q9-1" class="quiz-dropdown">
+                        <option value="">-- Elige --</option>
+                        <option value="Es muy sensible al sol">Es muy sensible al sol</option>
+                        <option value="Porque es muy delgada">Porque es muy delgada</option>
+                        <option value="No le gusta el sol">No le gusta el sol</option>
+                        <option value="Solo se lastima en la noche">Solo se lastima en la noche</option>
+                    </select>
+                </div>
+                <div class="question-item">
+                    <label for="q9-2">¿Cómo compensa el rinoceronte su mala vista?</label>
+                    <select id="q9-2" name="q9-2" class="quiz-dropdown">
+                        <option value="">-- Elige --</option>
+                        <option value="Usa gafas">Usa gafas</option>
+                        <option value="Usa más su nariz y su oído">Usa más su nariz y su oído</option>
+                        <option value="Pide ayuda a otros animales">Pide ayuda a otros animales</option>
+                        <option value="Se guía por el sabor">Se guía por el sabor</option>
+                    </select>
+                </div>
+                <button type="button" class="submit-button" onclick="checkQuiz('quiz-9', 'results-9')">Verificar Respuestas</button>
+            </form>
+            <div id="results-9" class="quiz-results"></div>
+        </section>
+
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 Antología de Animales. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Objeto que contiene las respuestas correctas para cada quiz
+        const correctAnswers = {
+            'quiz-1': { // "Señalo el texto adecuado"
+                'q1-1': 'Una enciclopedia de animales'
+            },
+            'quiz-2': { // "Encierro los animales que creo que viven en el África." (checkboxes)
+                'africa_animal': ['León', 'Elefante', 'Cebra']
+            },
+            'quiz-3': { // "Completo el cuadro (Elefante)" - Ahora con dropdowns
+                'q3-1': 'Es el animal terrestre más grande', // Conocimiento previo
+                'q3-2': 'Cuántos años vive un elefante' // Deseo saber
+            },
+            'quiz-4': { // "Uno con una línea las partes del cuerpo del elefante y su característica."
+                'q4-1': 'corta', // Cola
+                'q4-2': 'larga y gruesa', // Patas
+                'q4-3': 'recoge hierbas, hojas y frutas', // Trompa
+                'q4-4': 'excavar para buscar alimento', // Colmillos
+                'q4-5': 'grandes' // Orejas
+            },
+            'quiz-5': { // "Selecciono tres características sobre la jirafa."
+                'q5-1': 'Es el animal más alto del mundo',
+                'q5-2': 'Su cuello es largo y flexible',
+                'q5-3': 'Se camufla gracias a sus manchas'
+            },
+            'quiz-6': { // "Contesto las preguntas (jirafa)"
+                'q6-1': 'El cuello',
+                'q6-2': 'Las delanteras son más largas',
+                'q6-3': 'Le sirven para camuflarse',
+                'q6-4': 'De hojas, hierba y ramitas'
+            },
+            'quiz-7': { // "Encierro las palabras que podrían describir a un rinoceronte." (checkboxes)
+                'rino_desc': ['grande', 'piel gruesa', 'cuerno en el hocico']
+            },
+            'quiz-8': { // "Marco con una X las oraciones que son verdaderas." (checkboxes)
+                'rino_verdadero': [
+                    'El rinoceronte busca alimento en la mañana muy temprano.',
+                    'El rinoceronte se alimenta de hierba y ramas.',
+                    'El rinoceronte tiene un cuerno en la punta del hocico.'
+                ]
+            },
+            'quiz-9': { // "Contesto las preguntas (rinoceronte)" - Ahora con dropdowns
+                'q9-1': 'Es muy sensible al sol',
+                'q9-2': 'Usa más su nariz y su oído'
+            },
+            'quiz-10': { // "Completo el texto con las palabras del recuadro."
+                'q10-1': 'proposito',
+                'q10-2': 'noticia',
+                'q10-3': 'informacion',
+                'q10-4': 'acontecimiento',
+                'q10-5': 'informativos'
+            }
+        };
+
+        /**
+         * Verifica las respuestas de un quiz y muestra el porcentaje de aciertos.
+         * Soporta preguntas de selección simple (dropdowns) y selección múltiple (checkboxes).
+         * @param {string} formId - El ID del formulario (ej. 'quiz-1').
+         * @param {string} resultsDivId - El ID del div donde se mostrarán los resultados.
+         */
+        function checkQuiz(formId, resultsDivId) {
+            const form = document.getElementById(formId);
+            const resultsDiv = document.getElementById(resultsDivId);
+            const answers = correctAnswers[formId]; // Las respuestas correctas para este quiz
+
+            let correctCount = 0;
+            let totalQuestions = 0;
+
+            for (const questionName in answers) {
+                const expectedAnswer = answers[questionName]; // Puede ser un string (dropdown) o un array (checkboxes)
+
+                if (form.elements[questionName] && form.elements[questionName].type === 'select-one') {
+                    // Pregunta de selección simple (dropdown)
+                    totalQuestions++;
+                    if (form.elements[questionName].value === expectedAnswer) {
+                        correctCount++;
+                    }
+                } else if (form.elements[questionName] && form.elements[questionName].length > 0 && form.elements[questionName][0].type === 'checkbox') {
+                    // Pregunta de selección múltiple (checkboxes)
+                    totalQuestions++;
+                    const userSelected = Array.from(form.elements[questionName])
+                                            .filter(checkbox => checkbox.checked)
+                                            .map(checkbox => checkbox.value);
+
+                    // Verifica si las selecciones del usuario coinciden exactamente con las respuestas esperadas
+                    // Tanto en contenido como en cantidad
+                    const isCorrect = userSelected.length === expectedAnswer.length &&
+                                      userSelected.every(value => expectedAnswer.includes(value));
+                    
+                    if (isCorrect) {
+                        correctCount++;
+                    }
+                }
+            }
+
+            const percentage = (totalQuestions > 0) ? (correctCount / totalQuestions) * 100 : 0;
+
+            let message = `¡Has completado esta actividad! <br>`;
+            if (percentage === 100) {
+                message += `<span class="score-perfect">¡Felicidades! Has obtenido un ${percentage.toFixed(0)}% de aciertos.</span>`;
+            } else if (percentage >= 70) {
+                message += `<span class="score-good">¡Muy bien! Has obtenido un ${percentage.toFixed(0)}% de aciertos.</span>`;
+            } else if (percentage >= 50) {
+                message += `<span class="score-average">Puedes mejorar. Has obtenido un ${percentage.toFixed(0)}% de aciertos.</span>`;
+            } else {
+                message += `<span class="score-low">Sigue practicando. Has obtenido un ${percentage.toFixed(0)}% de aciertos.</span>`;
+            }
+
+            resultsDiv.innerHTML = message;
+            resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // --- Funcionalidad de Lectura en Voz Alta ---
+        const synth = window.speechSynthesis; // Objeto de síntesis de voz
+
+        /**
+         * Lee en voz alta el contenido de una actividad.
+         * @param {string} activityId - El ID del elemento que contiene la actividad (normalmente un h3).
+         */
+        function readActivity(activityId) {
+            if (!synth) {
+                alert("Tu navegador no soporta la lectura en voz alta.");
+                return;
+            }
+
+            // Detener cualquier lectura en progreso
+            if (synth.speaking) {
+                synth.cancel();
+            }
+
+            const activityElement = document.getElementById(activityId);
+            if (activityElement) {
+                // Queremos leer el título y el contenido relevante de la actividad.
+                // Podríamos buscar el elemento padre o hermanos para obtener todo el texto.
+                let textToRead = '';
+                
+                // Obtener el texto del h3
+                textToRead += activityElement.textContent.replace('🔊', '').trim() + '. '; // Eliminar el ícono del texto a leer
+
+                // Intentar obtener más contenido relevante de la actividad
+                // Esto es una heurística y puede necesitar ajustes finos.
+                let currentElement = activityElement.nextElementSibling;
+                while (currentElement && !currentElement.classList.contains('quiz-results') && currentElement.tagName !== 'H3' && currentElement.tagName !== 'SECTION') {
+                    if (currentElement.tagName === 'P' || currentElement.tagName === 'LABEL' || currentElement.tagName === 'SPAN') {
+                        textToRead += currentElement.textContent.trim() + '. ';
+                    } else if (currentElement.classList.contains('image-with-caption')) {
+                        // Si hay una imagen con descripción, leer solo la descripción
+                        const caption = currentElement.querySelector('p');
+                        if (caption) {
+                            textToRead += caption.textContent.trim() + '. ';
+                        }
+                    } else if (currentElement.classList.contains('quiz-form')) {
+                        // Leer solo las preguntas de los formularios
+                        const labels = currentElement.querySelectorAll('.question-item label');
+                        labels.forEach(label => {
+                            textToRead += label.textContent.trim() + '. ';
+                        });
+                    }
+                    currentElement = currentElement.nextElementSibling;
+                }
+
+                // Si no se encontró texto relevante cerca, leer el título completo como mínimo.
+                if (textToRead.length < 10) { // Un umbral arbitrario para verificar si hay contenido sustancial
+                     textToRead = activityElement.textContent.replace('🔊', '').trim();
+                }
+                
+                const utterance = new SpeechSynthesisUtterance(textToRead);
+                utterance.lang = 'es-ES'; // Establecer el idioma a español
+                utterance.pitch = 1;      // Tono de voz (0 a 2)
+                utterance.rate = 1;       // Velocidad de voz (0.1 a 10)
+                utterance.volume = 1;     // Volumen (0 a 1)
+
+                // Puedes seleccionar una voz específica si lo deseas (opcional)
+                // const voices = synth.getVoices();
+                // utterance.voice = voices.find(voice => voice.lang === 'es-ES' && voice.name.includes('Google español')); // O una voz específica que prefieras
+
+                synth.speak(utterance);
+            }
+        }
+    </script>
+</body>
+</html>

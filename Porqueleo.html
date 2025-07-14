@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Porque Leo?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos generales */
+        :root {
+    --primary-color: #ab49a5; /* Verde vibrante */
+            
+            --secondary-color: #dedee2; /* Morado de fondo */
+            --accent-color: #bfbcbf; /* Lila */
+            --text-color: #333;
+            --light-text-color: #f8f8f8;
+            --card-bg-color: #FFFFFF;
+            --border-color: #EEE;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--secondary-color); /* Fondo morado */
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Encabezado */
+        .main-header {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 10px var(--shadow-color);
+        }
+
+        .main-header h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 3rem;
+            margin: 0;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .main-header p {
+            font-size: 1.1rem;
+            margin-top: 5px;
+            opacity: 0.9;
+        }
+
+        /* Contenido principal */
+        main {
+            flex: 1;
+            padding: 40px 0;
+        }
+
+        .card {
+            background-color: var(--card-bg-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        h2 {
+            font-family: 'Merriweather', serif;
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h3 {
+            font-family: 'Merriweather', serif;
+            color: var(--primary-color);
+            font-size: 1.6rem;
+            margin-top: 0;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        p {
+            color: var(--text-color);
+            text-align: justify;
+        }
+
+        /* Sección de importancia */
+        .importance-section p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Diseño de preguntas con imagen */
+        .question-layout {
+            display: flex;
+            align-items: flex-start;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .image-column {
+            flex: 0 0 350px;
+            text-align: center;
+        }
+
+        .question-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 3px solid var(--accent-color);
+        }
+
+        .questions-column {
+            flex: 1;
+        }
+
+        .quiz-form .question-item {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .quiz-form label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+
+        .quiz-dropdown {
+            padding: 10px 15px;
+            border: 1px solid var(--accent-color);
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: white;
+            cursor: pointer;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23DDA0DD%22%20d%3D%22M287%2C197.973L146.202%2C27.027L5.404%2C197.973H287z%22%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 12px auto;
+        }
+
+        .quiz-dropdown:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(93, 63, 211, 0.2);
+        }
+
+        .submit-button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            display: block; /* Para centrar */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .submit-button:hover {
+            background-color: #4a33a3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .quiz-results {
+            margin-top: 25px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: center;
+            padding: 15px;
+            border: 2px dashed var(--accent-color);
+            border-radius: 8px;
+            background-color: #F3E5F5;
+        }
+
+        .quiz-results .score-perfect { color: #28a745; }
+        .quiz-results .score-good { color: #17a2b8; }
+        .quiz-results .score-average { color: #ffc107; }
+        .quiz-results .score-low { color: #dc3545; }
+
+        /* Sección de Observar Cartel */
+        .cartel-section p {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .cartel-image {
+            max-width: 600px; /* Tamaño máximo para el cartel central */
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto 30px auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            border: 3px solid var(--primary-color);
+        }
+
+        .three-images {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap; /* Permite que las imágenes se envuelvan en pantallas pequeñas */
+            margin-bottom: 30px;
+        }
+
+        .three-images img {
+            max-width: 30%; /* Cada imagen ocupa hasta 30% del ancho */
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border: 2px solid var(--accent-color);
+            min-width: 150px; /* Para evitar que sean demasiado pequeñas */
+        }
+
+        /* Sección de completar texto */
+        .complete-text-section .horizontal-image {
+            width: 100%; /* Ocupa el 100% del ancho del contenedor */
+            height: auto;
+            display: block;
+            margin: 0 auto 30px auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            border: 3px solid var(--primary-color);
+        }
+
+        /* Pie de página */
+        .main-footer {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 40px;
+            box-shadow: 0 -2px 8px var(--shadow-color);
+        }
+
+        .main-footer p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            color: var(--light-text-color);
+        }
+
+        /* Media Queries para responsividad */
+        @media (max-width: 768px) {
+            .main-header h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.7rem; }
+            h3 { font-size: 1.4rem; }
+            .card { padding: 20px; }
+            .question-layout { flex-direction: column; gap: 20px; }
+            .image-column { flex: auto; }
+            .question-image { max-width: 80%; margin: 0 auto; }
+            .three-images img { max-width: 48%; /* Dos columnas en móvil */ }
+            .horizontal-image { margin-left: 0; margin-right: 0; }
+        }
+
+        @media (max-width: 480px) {
+            .main-header h1 { font-size: 1.8rem; }
+            .three-images img { max-width: 100%; /* Una columna en móvil */ }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <h1>Porque Leo</h1>
+            
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="importance-section card">
+            <h2>La Importancia de Leer</h2>
+            <p>La lectura es una herramienta fundamental que nos permite explorar mundos, adquirir conocimientos, desarrollar nuestra imaginación y empatía. A través de los libros, conectamos con ideas y perspectivas diversas, enriqueciendo nuestro vocabulario y mejorando nuestra capacidad de comunicación. Leer no solo nos informa, sino que también nos forma, abriendo puertas a nuevas oportunidades y entendimientos.</p>
+        </section>
+
+        <section class="question-activity card">
+            <h3>Contesta las preguntas guiándote con la imagen</h3>
+            <div class="question-layout">
+                <div class="image-column">
+                    <img src="01.png" alt="Imagen guía para preguntas" class="question-image">
+                </div>
+                <div class="questions-column">
+                    <form id="quiz-form-1" class="quiz-form">
+                        <div class="question-item">
+                            <label for="q1-1">¿Qué vende este almacén?</label>
+                            <select id="q1-1" name="q1-1" class="quiz-dropdown">
+                                <option value="">-- Elige --</option>
+                                <option value="Biscochos y tortas">Biscochos y tortas</option>
+                                <option value="Ropa y accesorios">Ropa y accesorios</option>
+                                <option value="Herramientas y ferretería">Herramientas y ferretería</option>
+                                <option value="Libros y revistas">Libros y revistas</option>
+                            </select>
+                        </div>
+                        <div class="question-item">
+                            <label for="q1-2">¿Qué película están dando?</label>
+                            <select id="q1-2" name="q1-2" class="quiz-dropdown">
+                                <option value="">-- Elige --</option>
+                                <option value="La Era del Hielo">La Era del Hielo</option>
+                                <option value="kunfu panda">Kung Fu Panda</option>
+                                <option value="Toy Story">Toy Story</option>
+                                <option value="El Rey León">El Rey León</option>
+                            </select>
+                        </div>
+                        <div class="question-item">
+                            <label for="q1-3">¿Qué puedo comprar en estos dos almacenes?</label>
+                            <select id="q1-3" name="q1-3" class="quiz-dropdown">
+                                <option value="">-- Elige --</option>
+                                <option value="libros y juguetes">libros y juguetes</option>
+                                <option value="comida y medicamentos">Comida y medicamentos</option>
+                                <option value="muebles y electrónica">muebles y electrónica</option>
+                                <option value="flores y regalos">flores y regalos</option>
+                            </select>
+                        </div>
+                        <div class="question-item">
+                            <label for="q1-4">¿Qué tipo de ropa puedo comprar?</label>
+                            <select id="q1-4" name="q1-4" class="quiz-dropdown">
+                                <option value="">-- Elige --</option>
+                                <option value="ropa elegante">ropa elegante</option>
+                                <option value="ropa casual">ropa casual</option>
+                                <option value="ropa deprotiva">Ropa deportiva</option>
+                                <option value="ropa formal">ropa formal</option>
+                            </select>
+                        </div>
+                        <button type="button" class="submit-button" onclick="checkAnswers('quiz-form-1', 'results-1')">Verificar Respuestas</button>
+                    </form>
+                    <div id="results-1" class="quiz-results"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="activity-section card">
+            <h3>Leo la situación y digo qué debe decir el letrero, del lugar al que debo ir.</h3>
+            <form id="quiz-form-2" class="quiz-form">
+                <div class="question-item">
+                    <label for="q2-1">Quiero comprar un lápiz.</label>
+                    <select id="q2-1" name="q2-1" class="quiz-dropdown">
+                        <option value="">-- Elige --</option>
+                        <option value="Papelería">Papelería</option>
+                        <option value="Panadería">Panadería</option>
+                        <option value="Farmacia">Farmacia</option>
+                        <option value="Supermercado">Supermercado</option>
+                    </select>
+                </div>
+                <div class="question-item">
+                    <label for="q2-2">Quiero comprar zapatos.</label>
+                    <select id="q2-2" name="q2-2" class="quiz-dropdown">
+                        <option value="">-- Elige --</option>
+                        <option value="Zapatería">Zapatería</option>
+                        <option value="Librería">Librería</option>
+                        <option value="Carnicería">Carnicería</option>
+                        <option value="Peluquería">Peluquería</option>
+                    </select>
+                </div>
+                <div class="question-item">
+                    <label for="q2-3">Quiero comprar verduras.</label>
+                    <select id="q2-3" name="q2-3" class="quiz-dropdown">
+                        <option value="">-- Elige --</option>
+                        <option value="Joyería">Joyería</option>
+                        <option value="Frutería">Frutería</option>
+                        <option value="Ferretería">Ferretería</option>
+                        <option value="Tienda de ropa">Tienda de ropa</option>
+                    </select>
+                </div>
+                <button type="button" class="submit-button" onclick="checkAnswers('quiz-form-2', 'results-2')">Verificar Respuestas</button>
+            </form>
+            <div id="results-2" class="quiz-results"></div>
+        </section>
+
+        <section class="cartel-section card">
+            <h3>Observo este cartel y comento con mis compañeros y compañeras si es útil o no.</h3>
+            <img src="02.png" alt="Imagen de un cartel para comentar" class="cartel-image">
+
+            <div class="three-images">
+                <img src="03.png" alt="Imagen pequeña 1">
+                <img src="04.png" alt="Imagen pequeña 2">
+                <img src="05.png" alt="Imagen pequeña 3">
+            </div>
+        </section>
+
+        <section class="complete-text-section card">
+            <h3>Completo el texto con las palabras del recuadro.</h3>
+            <img src="06.png" alt="Imagen horizontal para el texto" class="horizontal-image">
+
+            <form id="quiz-form-3" class="quiz-form">
+                <p>Las personas escriben siempre con un
+                    <select name="q3-1" class="quiz-dropdown">
+                        <option value="">-- Elige --</option>
+                        <option value="proposito">propósito</option>
+                        <option value="sueño">sueño</option>
+                        <option value="deseo">deseo</option>
+                        <option value="capricho">capricho</option>
+                    </select>.
+                </p>
+                <p>Unas veces lo hacen para dar a conocer una
+                    <select name="q3-2" class="quiz-dropdown">
+                        <option value="">-- Elige --</option>
+                        <option value="idea">idea</option>
+                        <option value="noticia">noticia</option>
+                        <option value="canción">canción</option>
+                        <option value="receta">receta</option>
+                    </select>,
+                </p>
+                <p>una
+                    <select name="q3-3" class="quiz-dropdown">
+                        <option value="">-- Elige --</option>
+                        <option value="pregunta">pregunta</option>
+                        <option value="informacion">información</option>
+                        <option value="mentira">mentira</option>
+                        <option value="adivinanza">adivinanza</option>
+                    </select>
+                </p>
+                <p>o un
+                    <select name="q3-4" class="quiz-dropdown">
+                        <option value="">-- Elige --</option>
+                        <option value="acontecimiento">acontecimiento</option>
+                        <option value="problema">problema</option>
+                        <option value="secreto">secreto</option>
+                        <option value="pensamiento">pensamiento</option>
+                    </select>.
+                </p>
+                <p>Cuando el propósito de las personas es informar, escriben textos
+                    <select name="q3-5" class="quiz-dropdown">
+                        <option value="">-- Elige --</option>
+                        <option value="poéticos">poéticos</option>
+                        <option value="informativos">informativos</option>
+                        <option value="fantásticos">fantásticos</option>
+                        <option value="narrativos">narrativos</option>
+                    </select>.
+                </p>
+                <button type="button" class="submit-button" onclick="checkAnswers('quiz-form-3', 'results-3')">Verificar Respuestas</button>
+            </form>
+            <div id="results-3" class="quiz-results"></div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 Porque Leo. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Objeto que contiene las respuestas correctas para cada formulario de quiz
+        const correctAnswers = {
+            'quiz-form-1': {
+                'q1-1': 'Biscochos y tortas',
+                'q1-2': 'kunfu panda',
+                'q1-3': 'comida y medicamentos',
+                'q1-4': 'ropa deprotiva'
+            },
+            'quiz-form-2': {
+                'q2-1': 'Papelería',
+                'q2-2': 'Zapatería',
+                'q2-3': 'Frutería'
+            },
+            'quiz-form-3': {
+                'q3-1': 'proposito',
+                'q3-2': 'noticia',
+                'q3-3': 'informacion',
+                'q3-4': 'acontecimiento',
+                'q3-5': 'informativos'
+            }
+        };
+
+        /**
+         * Verifica las respuestas de un formulario de quiz específico y muestra el porcentaje.
+         * @param {string} formId - El ID del formulario HTML a verificar.
+         * @param {string} resultsDivId - El ID del div donde se mostrarán los resultados.
+         */
+        function checkAnswers(formId, resultsDivId) {
+            const form = document.getElementById(formId);
+            const resultsDiv = document.getElementById(resultsDivId);
+            const answers = correctAnswers[formId]; // Obtiene las respuestas correctas para este formulario
+
+            let correctCount = 0;
+            let totalQuestions = 0;
+
+            for (const questionName in answers) {
+                totalQuestions++; // Incrementa el total de preguntas
+                const userAnswer = form.elements[questionName].value;
+                if (userAnswer === answers[questionName]) {
+                    correctCount++;
+                }
+            }
+
+            const percentage = (correctCount / totalQuestions) * 100;
+
+            let message = `¡Has completado esta actividad! <br>`;
+            if (percentage === 100) {
+                message += `<span class="score-perfect">¡Felicidades! Has obtenido un ${percentage.toFixed(0)}% de aciertos.</span>`;
+            } else if (percentage >= 70) {
+                message += `<span class="score-good">¡Muy bien! Has obtenido un ${percentage.toFixed(0)}% de aciertos.</span>`;
+            } else if (percentage >= 50) {
+                message += `<span class="score-average">Puedes mejorar. Has obtenido un ${percentage.toFixed(0)}% de aciertos.</span>`;
+            } else {
+                message += `<span class="score-low">Sigue practicando. Has obtenido un ${percentage.toFixed(0)}% de aciertos.</span>`;
+            }
+
+            resultsDiv.innerHTML = message;
+            // Desplazarse a los resultados para que el usuario los vea
+            resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>La pájara pinta - texto cambia con clic</title>
+  <style>
+    html, body {
+      margin: 0; padding: 0; height: 100%; overflow: hidden;
+      font-family: 'Comic Sans MS', sans-serif;
+    }
+    #bg-video {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; z-index: -1;
+    }
+    .text-container {
+      position: absolute;
+      bottom: 0; width: 100%;
+      text-align: center;
+      color: rgb(21, 0, 213);
+      padding: 20px;
+      font-size: 4em;
+      user-select: none; /* para que no se seleccione el texto al hacer clic */
+      cursor: pointer; /* indica que se puede hacer clic */
+    }
+    .scene {
+      display: none;
+      animation: fadeIn 1s ease-in-out;
+    }
+    .scene.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<video id="bg-video" autoplay loop>
+  <source src="la-pajara-pinta-cancion-infantil_qnx93KND.mp4" type="video/mp4" />
+  Tu navegador no soporta video.
+</video>
+
+<div class="text-container" id="text-container">
+    <div class="scene active">
+    <p>Inicio</p>
+  </div>
+  <div class="scene ">
+    <p>Estaba la pájara pinta sentada en su verde limón</p>
+  </div>
+  <div class="scene">
+    <p>Con el pico recoge la rama, con la rama cortaba la flor</p>
+  </div>
+  <div class="scene ">
+    <p>Estaba la pájara pinta sentada en su verde limón</p>
+  </div>
+  <div class="scene">
+    <p>Con el pico recoge la rama, con la rama cortaba la flor</p>
+  </div>
+  <div class="scene">
+    <p>¡Ay, ay, ay! ¿Cuándo vendrá mi amor?</p>
+  </div>
+  <div class="scene">
+    <p>¡Ay, ay, ay! ¿Cuándo vendrá mi amor?</p>
+  </div>
+  <div class="scene">
+    <p>Daré la media vuelta daré la vuelta entera daré un pasito atrás haciendo la reverencia</p>
+  </div>
+  <div class="scene">
+    <p>Pero no, Pero no, Pero no,  porque me da vergüenza… pero sí, pero sí, pero sí, porque te quiero a ti</p>
+  </div>
+  <div class="scene ">
+    <p>Estaba la pájara pinta sentada en su verde limón</p>
+  </div>
+  <div class="scene">
+    <p>Con el pico recoge la rama, con la rama cortaba la flor</p>
+  </div>
+  <div class="scene ">
+    <p>Estaba la pájara pinta sentada en su verde limón</p>
+  </div>
+  <div class="scene">
+    <p>Con el pico recoge la rama, con la rama cortaba la flor</p>
+  </div>
+  <div class="scene">
+    <p>¡Ay, ay, ay! ¿Cuándo vendrá mi amor?</p>
+  </div>
+  <div class="scene">
+    <p>¡Ay, ay, ay! ¿Cuándo vendrá mi amor?</p>
+  </div>
+</div>
+
+
+<script>
+  const scenes = document.querySelectorAll('.scene');
+  const video = document.getElementById('bg-video');
+  const tiempos = [6840, 3000, 4000, 5000, 4500, 4000, 3600, 7000, 16000, 4000, 5000, 4500, 4000, 3600];
+  let started = false;
+
+  function mostrarEscena(i) {
+    if (i > 0) scenes[i - 1].classList.remove('active');
+    if (i >= scenes.length) return;
+    scenes[i].classList.add('active');
+    setTimeout(() => mostrarEscena(i + 1), tiempos[i]);
+  }
+
+  // Al hacer clic, iniciar video y animaciones
+  document.body.addEventListener('click', () => {
+    if (!started) {
+      started = true;
+      video.muted = false;
+      video.play().catch(() => {});
+      mostrarEscena(0);
+    }
+  });
+</script>
+
+</body>
+</html>
